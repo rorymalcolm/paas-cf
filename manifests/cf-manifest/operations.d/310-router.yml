@@ -55,3 +55,21 @@
     ((network_policy_server_external.ca))
     ((credhub_tls.ca))
     ((vault_tls.ca))
+
+- type: replace
+  path: /instance_groups/name=router/jobs/name=gorouter/properties/router/html_error_template?
+  value: |
+    <html>
+      <head><link rel="stylesheet" href="https://unpkg.com/98.css"></head>
+      <body style="display: flex; align-items: center; justify-content: center;">
+        <div class="window" style="width: 500px">
+          <div class="title-bar">
+            <div class="title-bar-text">{{ .Status }} {{ .StatusText }}</div>
+          </div>
+          <div class="window-body">
+            <p>{{ .Message }}</p>
+            <p>{{ .Header.Get "X-Cf-RouterError" }}</p>
+          </div>
+        </div>
+      </body>
+    </html>
